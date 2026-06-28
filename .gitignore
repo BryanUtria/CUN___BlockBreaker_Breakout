@@ -1,0 +1,20 @@
+# Archivos del empaquetado del juego
+*.love
+*.exe
+*.zip
+
+# Visual Studio Code
+.vscode/
+
+# Archivos temporales o generados por el sistema operativo
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+*.log
+*~
+
+# Directorios de builds y binarios
+/build/
+/bin/
+/dist/
