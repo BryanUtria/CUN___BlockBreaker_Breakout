@@ -18,7 +18,6 @@ end
 
 function Pelota:dibujar()
     love.graphics.setColor(self._color)
-    -- Dibujar la pelota redonda usando el radio (ancho/2)
     love.graphics.circle("fill", self._x + self._ancho/2, self._y + self._alto/2, self._ancho/2)
 end
 

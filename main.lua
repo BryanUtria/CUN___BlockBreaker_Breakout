@@ -6,7 +6,7 @@ local EstadoPausa = require("src.states.EstadoPausa")
 local EstadoFinJuego = require("src.states.EstadoFinJuego")
 local EstadoVictoria = require("src.states.EstadoVictoria")
 
--- Módulos de pulido globales (Tweening y Partículas)
+-- Módulos de pulido globales
 gAnimacion = require("src.utils.Animacion")
 gParticulas = require("src.core.Particulas")
 
@@ -22,8 +22,6 @@ function love.load()
     gPuntosShake = 0
     gParticulas.iniciar()
     
-    -- Las imágenes estáticas ya no son necesarias (usamos shaders)
-    
     -- Cargar sonidos (usamos pcall por si no existen los archivos aún)
     gSonidos = {}
     local function cargarSonido(nombre, ruta)
@@ -37,7 +35,7 @@ function love.load()
     cargarSonido("perder", "assets/sounds/perder.mp3")
     cargarSonido("perderVida", "assets/sounds/perderVida.mp3")
     
-    -- Cargar música de fondo (usamos "stream" en lugar de "static" porque es un archivo largo y ahorra RAM)
+    -- Cargar música de fondo 
     local exitoMusica, musica = pcall(love.audio.newSource, "assets/sounds/musica.ogg", "stream")
     if exitoMusica then
         gSonidos["musica"] = musica
@@ -225,7 +223,7 @@ function love.load()
     gMaquinaEstados:cambiar("titulo")
 end
 
--- Función auxiliar global para dibujar el fondo sin repetir código
+-- Función auxiliar global para dibujar el fondo
 function gDibujarFondoJuego()
     if gFondoJuegoShader then
         love.graphics.setShader(gFondoJuegoShader)
@@ -239,18 +237,15 @@ function gDibujarFondoJuego()
     end
 end
 
--- Función auxiliar global para dibujar el HUD con un estilo más pulido
+-- Función auxiliar global para dibujar el HUD
 function gDibujarHUD(vidas, puntos, nivel, avance)
     local w = love.graphics.getWidth()
     
-    -- Fondo de la barra superior transparente (sin rectángulo oscuro)
-    -- Se elimina el fill de fondo
-    
-    -- Borde inferior de la barra (Línea suave y sutil con un poco de glow)
+    -- Borde inferior de la barra
     love.graphics.setColor(0, 0.8, 1, 0.1)
-    love.graphics.rectangle("fill", 0, 34, w, 3) -- Glow externo
+    love.graphics.rectangle("fill", 0, 34, w, 3)
     love.graphics.setColor(0, 0.8, 1, 0.4)
-    love.graphics.rectangle("fill", 0, 35, w, 1) -- Línea central fina
+    love.graphics.rectangle("fill", 0, 35, w, 1)
     
     love.graphics.setFont(gFuentes['peque'])
     
@@ -276,7 +271,6 @@ function gDibujarHUD(vidas, puntos, nivel, avance)
     
     love.graphics.print("PUNTOS:", 105, 9)
     love.graphics.setColor(1, 1, 1)
-    -- Se aumenta el espaciado para que el número de puntos no quede pegado al texto
     love.graphics.print(tostring(puntos), 195, 9)
     
     -- Avance (Barra de progreso visual)
@@ -289,7 +283,7 @@ function gDibujarHUD(vidas, puntos, nivel, avance)
     love.graphics.setColor(0.2, 0.2, 0.2, 0.8)
     love.graphics.rectangle("fill", barX, barY, barW, barH, 4, 4)
     
-    -- Relleno de progreso (Color que va de cyan a verde)
+    -- Relleno de progreso
     local ratio = avance / 100
     love.graphics.setColor(0.2, 1.0 * ratio + 0.5, 1.0 * (1 - ratio) + 0.2, 0.9)
     love.graphics.rectangle("fill", barX, barY, barW * ratio, barH, 4, 4)

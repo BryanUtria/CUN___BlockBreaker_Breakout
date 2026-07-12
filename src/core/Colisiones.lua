@@ -22,7 +22,6 @@ function Colisiones.resolverPelotaLadrillo(pelota, ladrillo)
     local minOverlap = math.min(overlapLeft, overlapRight, overlapTop, overlapBottom)
     
     -- Solo rebotamos si la pelota se mueve HACIA la cara con la que chocó
-    -- Esto soluciona los rebotes "locos" cuando choca en esquinas o entre dos ladrillos
     if minOverlap == overlapTop and pelota._dy > 0 then
         pelota:rebotarEjeY()
         pelota._y = ladrillo._y - pelota._alto

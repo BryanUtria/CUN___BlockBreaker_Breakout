@@ -13,13 +13,11 @@ end
 
 function EstadoPausa:actualizar(dt)
     if love.keyboard.fuePresionada("escape") or love.keyboard.fuePresionada("return") or love.keyboard.fuePresionada("space") then
-        -- Volver al juego (could use a simple debounce in main.lua)
         gMaquinaEstados.estadoActual = self.estadoJugar
     end
 end
 
 function EstadoPausa:dibujar()
-    -- Dibujar el estado de juego debajo
     self.estadoJugar:dibujar()
     
     love.graphics.setColor(0, 0, 0, 0.5)

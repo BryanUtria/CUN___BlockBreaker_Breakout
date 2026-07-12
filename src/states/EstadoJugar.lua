@@ -16,11 +16,9 @@ function EstadoJugar:entrar(params)
     self.puntuacion = params.puntuacion
     self.nivel = params.nivel
     
-    self.pelotas = { params.pelota } -- Ahora soportamos múltiples pelotas
+    self.pelotas = { params.pelota }
     self.mejoras = {}
     self.vidaExtraSoltada = false -- Bandera para soltar máximo 1 vida por nivel
-    
-    -- El shader ahora se inicializa globalmente en main.lua y se dibuja con gDibujarFondoJuego()
 end
 
 function EstadoJugar:actualizar(dt)
@@ -33,7 +31,7 @@ function EstadoJugar:actualizar(dt)
 
     self.raqueta:actualizar(dt)
     
-    -- Actualizar Ladrillos (para efecto de brillo)
+    -- Actualizar Ladrillos
     for _, ladrillo in ipairs(self.mapaNivel.ladrillos) do
         if ladrillo.actualizar then
             ladrillo:actualizar(dt)
@@ -45,7 +43,7 @@ function EstadoJugar:actualizar(dt)
         local m = self.mejoras[i]
         m:actualizar(dt)
         if m:colisiona(self.raqueta) then
-            if m.efecto then m.efecto(self) end -- Ejecuta el truco elegante
+            if m.efecto then m.efecto(self) end
             if gSonidos["mejora"] then
                 gSonidos["mejora"]:stop()
                 gSonidos["mejora"]:play()
@@ -74,7 +72,6 @@ function EstadoJugar:actualizar(dt)
             local t = (centroPelota - centroRaqueta) / (self.raqueta._ancho / 2)
             
             local maxVx = 400
-            -- Conservamos un poco del impulso que traía (40%) y aplicamos la fuerza de la raqueta (80%)
             -- Esto evita giros de 180 grados instantáneos y hace que la física se sienta más natural
             pelota._dx = (pelota._dx * 0.4) + (t * maxVx * 0.8)
             
@@ -151,7 +148,6 @@ function EstadoJugar:actualizar(dt)
                                     for num = 1, 2 do
                                         local pNueva = Pelota.new(pBase._x, pBase._y, pBase._ancho, pBase._alto)
                                         pNueva._dx = math.random(-150, 150)
-                                        -- Asegurar rebote hacia arriba o continuar la dirección pero variando la velocidad
                                         pNueva._dy = -math.abs(pBase._dy)
                                         table.insert(nuevasPelotas, pNueva)
                                     end
@@ -179,7 +175,7 @@ function EstadoJugar:actualizar(dt)
     if #self.pelotas == 0 then
         self.vidas = self.vidas - 1
         gPuntosShake = 25
-        self.raqueta._ancho = 64 -- Restaurar tamaño normal al morir
+        self.raqueta._ancho = 64
         
         if self.vidas <= 0 then
             -- Solo suena si es verdaderamente el fin del juego
@@ -208,7 +204,7 @@ function EstadoJugar:actualizar(dt)
 
     -- Comprobar si se completó el nivel
     if self.mapaNivel:esNivelCompletado() then
-        self.raqueta._ancho = 64 -- Restaurar al pasar nivel
+        self.raqueta._ancho = 64
         if self.nivel == 2 then
             gMaquinaEstados:cambiar("victoria", {puntuacion = self.puntuacion})
         else
@@ -222,7 +218,7 @@ function EstadoJugar:actualizar(dt)
 end
 
 function EstadoJugar:dibujar()
-    -- Dibujar el fondo global (compartido con otros estados)
+    -- Dibujar el fondo global
     gDibujarFondoJuego()
 
     self.mapaNivel:dibujar()
@@ -236,7 +232,7 @@ function EstadoJugar:dibujar()
         m:dibujar()
     end
     
-    -- Dibujar HUD usando la función global pulida
+    -- Dibujar HUD
     gDibujarHUD(self.vidas, self.puntuacion, self.nivel, self.mapaNivel:obtenerAvance())
 end
 

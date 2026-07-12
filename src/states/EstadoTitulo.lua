@@ -119,7 +119,7 @@ function EstadoTitulo:actualizar(dt)
 end
 
 function EstadoTitulo:dibujar()
-    -- 1. Dibujar el fondo del menú (Shader animado)
+    -- Dibujar el fondo del menú (Shader animado)
     if self.fondoShader then
         love.graphics.setShader(self.fondoShader)
         self.fondoShader:send("iTime", love.timer.getTime())
@@ -135,7 +135,6 @@ function EstadoTitulo:dibujar()
         love.graphics.clear(0.05, 0.05, 0.1, 1)
     end
     
-    -- 2. Dibujar el texto del título
     -- Sombra del título
     love.graphics.setColor(0, 0, 0, 0.7)
     love.graphics.setFont(gFuentes['titulo'])
@@ -151,7 +150,7 @@ function EstadoTitulo:dibujar()
     
     -- Nombres de los desarrolladores
     love.graphics.setFont(gFuentes['peque'])
-    love.graphics.setColor(1, 1, 1, 0.6) -- Un poco de transparencia para no distraer del título principal
+    love.graphics.setColor(1, 1, 1, 0.6)
     local desarrolladores = "Desarrollado por:\nLaura Barbosa Bedoya\nAndrés Felipe Uribe Rodríguez\nBrayan Steven Castelblanco Utria"
     love.graphics.printf(desarrolladores, 0, love.graphics.getHeight() - 80, love.graphics.getWidth(), "center")
 end

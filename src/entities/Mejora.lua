@@ -3,9 +3,8 @@ local ElementoJuego = require("src.entities.ElementoJuego")
 local Mejora = setmetatable({}, {__index = ElementoJuego})
 Mejora.__index = Mejora
 
--- Recibe la función 'efecto' directamente, como indica la rúbrica 5.0
 function Mejora.new(x, y, efecto, color, tipoNombre)
-    local self = setmetatable(ElementoJuego.new(x, y, 32, 14), Mejora) -- Cápsula un poco más grande
+    local self = setmetatable(ElementoJuego.new(x, y, 32, 14), Mejora) 
     self.efecto = efecto
     self._color = color or {1, 0.5, 0.5}
     self.tipoNombre = tipoNombre or "Poder"
@@ -23,9 +22,9 @@ end
 
 function Mejora:dibujar()
     if self._activa then
-        love.graphics.setColor(self._color) -- Color dinámico del powerup
+        love.graphics.setColor(self._color)
         
-        -- Dibujar cápsula (rectángulo con border radius igual a la mitad de la altura)
+        -- Dibujar cápsula
         love.graphics.rectangle("fill", self._x, self._y, self._ancho, self._alto, self._alto/2, self._alto/2)
         
         -- Pequeño brillo superior para dar efecto 3D
@@ -53,17 +52,17 @@ function Mejora:dibujar()
         end
         
         -- Texto flotante animado indicando qué es
-        local floatY = math.sin(love.timer.getTime() * 5) * 3 -- Movimiento oscilante
+        local floatY = math.sin(love.timer.getTime() * 5) * 3
         local textX = self._x - 50 + self._ancho/2
         local textY = self._y - 22 + floatY
         
         love.graphics.setFont(gFuentes['peque'])
         
-        -- Sombra del texto (negra) para legibilidad perfecta
+        -- Sombra del texto
         love.graphics.setColor(0, 0, 0, 0.8)
         love.graphics.printf(self.tipoNombre, textX + 1, textY + 1, 100, "center")
         
-        -- Texto principal (color de la mejora)
+        -- Texto principal
         love.graphics.setColor(self._color)
         love.graphics.printf(self.tipoNombre, textX, textY, 100, "center")
     end

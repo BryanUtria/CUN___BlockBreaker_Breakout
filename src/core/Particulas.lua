@@ -3,7 +3,6 @@ local Particulas = {}
 function Particulas.iniciar()
     Particulas.sistemas = {}
     
-    -- Crear una imagen blanca de 3x3 píxeles en memoria para no depender de archivos externos
     local canvas = love.graphics.newCanvas(3, 3)
     love.graphics.setCanvas(canvas)
     love.graphics.clear(1, 1, 1, 1)
@@ -13,13 +12,10 @@ end
 
 function Particulas.crearExplosion(x, y, color)
     local ps = love.graphics.newParticleSystem(Particulas.imagenBase, 50)
-    -- Viven entre 0.2 y 0.5 segundos
     ps:setParticleLifetime(0.2, 0.5)
-    -- Explotan en todas direcciones
     ps:setLinearAcceleration(-300, -300, 300, 300)
     
     if color then
-        -- Van de opaco a transparente
         ps:setColors(color[1], color[2], color[3], 1, color[1], color[2], color[3], 0)
     else
         ps:setColors(1, 1, 1, 1, 1, 1, 1, 0)

@@ -6,10 +6,8 @@ LadrilloFuerte.__index = LadrilloFuerte
 function LadrilloFuerte.new(x, y, ancho, alto, color1, color2)
     local self = setmetatable(Ladrillo.new(x, y, ancho, alto, color1), LadrilloFuerte)
     
-    -- Usamos el color vibrante que ya generó Ladrillo.new si no le pasamos color1
     self._colorFuerte = color1 or {self._color[1], self._color[2], self._color[3]}
     
-    -- El color débil (después de 1 golpe) será una versión más desaturada/clara del mismo color
     self._colorDebil = color2 or {
         (self._colorFuerte[1] + 1) / 2, 
         (self._colorFuerte[2] + 1) / 2, 

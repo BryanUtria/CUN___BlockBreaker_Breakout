@@ -18,7 +18,7 @@ end
 
 function LadrilloIrrompible:dibujar()
     if self._enJuego then
-        -- 0. Sombra paralela
+        -- Sombra paralela
         love.graphics.setColor(0, 0, 0, 0.6)
         love.graphics.rectangle("fill", self._x + 3, self._y + 4, self._ancho, self._alto, 6, 6)
         
@@ -28,13 +28,13 @@ function LadrilloIrrompible:dibujar()
         local g = self._color[2] + (1 - self._color[2]) * brilloAdicional
         local b = self._color[3] + (1 - self._color[3]) * brilloAdicional
         
-        -- 1. Base del bloque de hierro (Bordes redondeados para mantener consistencia)
+        -- Base del bloque de hierro (Bordes redondeados para mantener consistencia)
         love.graphics.setColor(r, g, b, 1)
         love.graphics.rectangle("fill", self._x, self._y, self._ancho, self._alto, 6, 6)
         
-        -- 2. Detalles metálicos (Placas interiores y remaches)
-        love.graphics.setColor(r * 0.7, g * 0.7, b * 0.7, 1) -- Gris oscuro
-        -- Borde interior para darle profundidad (también ligeramente redondeado)
+        -- Detalles metálicos (Placas interiores y remaches)
+        love.graphics.setColor(r * 0.7, g * 0.7, b * 0.7, 1)
+        -- Borde interior para darle profundidad
         love.graphics.rectangle("line", self._x + 4, self._y + 4, self._ancho - 8, self._alto - 8, 4, 4)
         
         -- Remaches en las esquinas
@@ -44,7 +44,7 @@ function LadrilloIrrompible:dibujar()
         love.graphics.rectangle("fill", self._x + 6, self._y + self._alto - 8, 2, 2)
         love.graphics.rectangle("fill", self._x + self._ancho - 8, self._y + self._alto - 8, 2, 2)
         
-        -- 3. Borde brillante de destello (igual que los demás cuando es golpeado)
+        -- Borde brillante de destello
         if self._brillo > 0 then
             love.graphics.setColor(1, 1, 1, self._brillo)
             love.graphics.setLineWidth(2)
