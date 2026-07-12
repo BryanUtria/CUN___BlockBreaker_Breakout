@@ -1,7 +1,7 @@
-local Pelota = require("Pelota")
-local GestorPuntuacion = require("GestorPuntuacion")
-local Nivel = require("Nivel")
-local Raqueta = require("Raqueta")
+local Pelota = require("src.entities.Pelota")
+local GestorPuntuacion = require("src.core.GestorPuntuacion")
+local Nivel = require("src.levels.Nivel")
+local Raqueta = require("src.entities.Raqueta")
 
 local CampoJuego = {}
 CampoJuego.__index = CampoJuego
