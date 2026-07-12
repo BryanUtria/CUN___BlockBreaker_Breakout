@@ -148,6 +148,12 @@ function EstadoTitulo:dibujar()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(gFuentes['normal'])
     love.graphics.printf("Presiona ENTER para empezar", 0, love.graphics.getHeight() / 2 + 50, love.graphics.getWidth(), "center")
+    
+    -- Nombres de los desarrolladores
+    love.graphics.setFont(gFuentes['peque'])
+    love.graphics.setColor(1, 1, 1, 0.6) -- Un poco de transparencia para no distraer del título principal
+    local desarrolladores = "Desarrollado por:\nLaura Barbosa Bedoya\nAndrés Felipe Uribe Rodríguez\nBrayan Steven Castelblanco Utria"
+    love.graphics.printf(desarrolladores, 0, love.graphics.getHeight() - 80, love.graphics.getWidth(), "center")
 end
 
 return EstadoTitulo
