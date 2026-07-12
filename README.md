@@ -58,8 +58,6 @@ Para poder ejecutar este juego en tu computadora, necesitas tener instalado lo s
    love .
    ```
 
-*(Nota: Asegúrate de tener la música de fondo `musica.ogg` o `musica.mp3` en la carpeta `assets/sounds/` para la experiencia completa).*
-
 ---
 
 ## Estructura del Proyecto
